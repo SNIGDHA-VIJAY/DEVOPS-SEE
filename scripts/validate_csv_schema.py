@@ -38,7 +38,7 @@ def main():
 
     ref_header = None
     for fp in files:
-        print(f"\nProcessing file: {os.path.basename(fp)}")  # 👈 Display file name before reading
+        print(f"\nProcessing file: {os.path.basename(fp)}")  # 
         hdr = read_header(fp)
 
         if ref_header is None:
@@ -58,21 +58,21 @@ def main():
 
         if missing:
             summary["missing_columns_detected"] = True
-            print(f"⚠️ Missing columns: {missing}")
+            print(f" Missing columns: {missing}")
         else:
-            print("✅ All required columns found.")
+            print("All required columns found.")
 
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
 
     if summary["missing_columns_detected"]:
-        print("\n❌ ERROR: Missing required columns detected. See JSON summary.")
+        print("\n ERROR: Missing required columns detected. See JSON summary.")
         sys.exit(1)
 
     if summary["inconsistent_headers_detected"]:
-        print("\n⚠️ WARNING: Inconsistent headers across files (build will still pass).")
+        print("\n WARNING: Inconsistent headers across files (build will still pass).")
 
-    print("\n✅ Validation complete. JSON report saved to:", args.out)
+    print("\n Validation complete. JSON report saved to:", args.out)
 
 if __name__ == "__main__":
     main()
